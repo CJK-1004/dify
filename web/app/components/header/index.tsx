@@ -62,16 +62,20 @@ const Header = () => {
           <Link href="/apps" className='flex items-center mr-4'>
             <LogoSite className='object-contain' />
           </Link>
+   {/* [수정] 삭제
           {systemFeatures.license.status === LicenseStatus.NONE && <GithubStar />}
-        </>}
+    */}
+        </>}        
       </div>
-      {isMobile && (
+       {isMobile && (
         <div className='flex'>
           <Link href="/apps" className='flex items-center mr-4'>
             <LogoSite />
           </Link>
-          {systemFeatures.license.status === LicenseStatus.NONE && <GithubStar />}
-        </div>
+     {/* [수정] 삭제
+            {systemFeatures.license.status === LicenseStatus.NONE && <GithubStar />}
+      */}
+         </div>
       )}
       {!isMobile && (
         <div className='flex items-center'>

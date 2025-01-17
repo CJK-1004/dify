@@ -5,7 +5,7 @@ const AppList = async () => {
 }
 
 export const metadata = {
-  title: 'Datasets - Dify',
+  title: 'Datasets - PBT', // [수정] 타이틀 변경
 }
 
 export default AppList

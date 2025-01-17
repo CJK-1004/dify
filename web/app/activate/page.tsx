@@ -22,7 +22,7 @@ const Activate = () => {
         <Header />
         <ActivateForm />
         <div className='px-8 py-6 text-sm font-normal text-gray-500'>
-          © {new Date().getFullYear()} LangGenius, Inc. All rights reserved.
+          © {new Date().getFullYear()} MagicEcole, Inc.  {/* [수정] 라이센스 변경 */}
         </div>
       </div>
     </div>
