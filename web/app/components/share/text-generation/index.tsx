@@ -416,7 +416,7 @@ const TextGeneration: FC<IMainProps> = ({
       if (canReplaceLogo)
         document.title = `${siteInfo.title}`
       else
-        document.title = `${siteInfo.title} - Powered by Dify`
+        document.title = `${siteInfo.title} - Powered by PBT`  // [수정] 타이틀 변경
     }
   }, [siteInfo?.title, canReplaceLogo])
 
