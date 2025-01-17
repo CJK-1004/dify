@@ -1,5 +1,5 @@
 # Variables
-DOCKER_REGISTRY=langgenius
+DOCKER_REGISTRY=magiceco
 WEB_IMAGE=$(DOCKER_REGISTRY)/dify-web
 API_IMAGE=$(DOCKER_REGISTRY)/dify-api
 VERSION=latest
