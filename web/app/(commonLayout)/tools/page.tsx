@@ -13,7 +13,7 @@ const Layout: FC = () => {
 
   useEffect(() => {
     if (typeof window !== 'undefined')
-      document.title = `${t('tools.title')} - Dify`
+      document.title = `${t('tools.title')} - PBT` // [수정] 타이틀 변경
     if (isCurrentWorkspaceDatasetOperator)
       return router.replace('/datasets')
   }, [isCurrentWorkspaceDatasetOperator, router, t])

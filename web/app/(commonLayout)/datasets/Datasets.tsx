@@ -61,7 +61,7 @@ const Datasets = ({
 
   useEffect(() => {
     loadingStateRef.current = isLoading
-    document.title = `${t('dataset.knowledge')} - Dify`
+    document.title = `${t('dataset.knowledge')} - PBT` // [수정] 타이틀 변경
   }, [isLoading])
 
   useEffect(() => {
