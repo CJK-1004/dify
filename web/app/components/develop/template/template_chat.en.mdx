@@ -176,7 +176,6 @@ import { Row, Col, Properties, Property, Heading, SubProperty, Paragraph } from 
 
   </Col>
   <Col sticky>
-
     <CodeGroup title="Request" tag="POST" label="/chat-messages" targetCode={`curl -X POST '${props.appDetail.api_base_url}/chat-messages' \\\n--header 'Authorization: Bearer {api_key}' \\\n--header 'Content-Type: application/json' \\\n--data-raw '{\n    "inputs": ${JSON.stringify(props.inputs)},\n    "query": "What are the specs of the iPhone 13 Pro Max?",\n    "response_mode": "streaming",\n    "conversation_id": "",\n    "user": "abc-123",\n    "files": [\n      {\n        "type": "image",\n        "transfer_method": "remote_url",\n        "url": "https://cloud.dify.ai/logo/logo-site.png"\n      }\n    ]\n}'`}>
 
     ```bash {{ title: 'cURL' }}
@@ -192,7 +191,7 @@ import { Row, Col, Properties, Property, Heading, SubProperty, Paragraph } from 
     }'
     ```
     </CodeGroup>
-    ### Blocking Mode
+
     <CodeGroup title="Response">
     ```json {{ title: 'Response' }}
     {
@@ -233,38 +232,11 @@ import { Row, Col, Properties, Property, Heading, SubProperty, Paragraph } from 
     }
     ```
     </CodeGroup>
-    ### Streaming Mode ( Basic Assistant )
-    <CodeGroup title="Response">
-    ```streaming {{ title: 'Response' }}
-      data: {"event": "message", "message_id": "5ad4cb98-f0c7-4085-b384-88c403be6290", "conversation_id": "45701982-8118-4bc5-8e9b-64562b4555f2", "answer": " I", "created_at": 1679586595}
-      data: {"event": "message", "message_id": "5ad4cb98-f0c7-4085-b384-88c403be6290", "conversation_id": "45701982-8118-4bc5-8e9b-64562b4555f2", "answer": "'m", "created_at": 1679586595}
-      data: {"event": "message", "message_id": "5ad4cb98-f0c7-4085-b384-88c403be6290", "conversation_id": "45701982-8118-4bc5-8e9b-64562b4555f2", "answer": " glad", "created_at": 1679586595}
-      data: {"event": "message", "message_id": "5ad4cb98-f0c7-4085-b384-88c403be6290", "conversation_id": "45701982-8118-4bc5-8e9b-64562b4555f2", "answer": " to", "created_at": 1679586595}
-      data: {"event": "message", "message_id": : "5ad4cb98-f0c7-4085-b384-88c403be6290", "conversation_id": "45701982-8118-4bc5-8e9b-64562b4555f2", "answer": " meet", "created_at": 1679586595}
-      data: {"event": "message", "message_id": : "5ad4cb98-f0c7-4085-b384-88c403be6290", "conversation_id": "45701982-8118-4bc5-8e9b-64562b4555f2", "answer": " you", "created_at": 1679586595}
-      data: {"event": "message_end", "id": "5e52ce04-874b-4d27-9045-b3bc80def685", "conversation_id": "45701982-8118-4bc5-8e9b-64562b4555f2", "metadata": {"usage": {"prompt_tokens": 1033, "prompt_unit_price": "0.001", "prompt_price_unit": "0.001", "prompt_price": "0.0010330", "completion_tokens": 135, "completion_unit_price": "0.002", "completion_price_unit": "0.001", "completion_price": "0.0002700", "total_tokens": 1168, "total_price": "0.0013030", "currency": "USD", "latency": 1.381760165997548}, "retriever_resources": [{"position": 1, "dataset_id": "101b4c97-fc2e-463c-90b1-5261a4cdcafb", "dataset_name": "iPhone", "document_id": "8dd1ad74-0b5f-4175-b735-7d98bbbb4e00", "document_name": "iPhone List", "segment_id": "ed599c7f-2766-4294-9d1d-e5235a61270a", "score": 0.98457545, "content": "\"Model\",\"Release Date\",\"Display Size\",\"Resolution\",\"Processor\",\"RAM\",\"Storage\",\"Camera\",\"Battery\",\"Operating System\"\n\"iPhone 13 Pro Max\",\"September 24, 2021\",\"6.7 inch\",\"1284 x 2778\",\"Hexa-core (2x3.23 GHz Avalanche + 4x1.82 GHz Blizzard)\",\"6 GB\",\"128, 256, 512 GB, 1TB\",\"12 MP\",\"4352 mAh\",\"iOS 15\""}]}}
-      data: {"event": "tts_message", "conversation_id": "23dd85f3-1a41-4ea0-b7a9-062734ccfaf9", "message_id": "a8bdc41c-13b2-4c18-bfd9-054b9803038c", "created_at": 1721205487, "task_id": "3bf8a0bb-e73b-4690-9e66-4e429bad8ee7", "audio": "qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq"}
-      data: {"event": "tts_message_end", "conversation_id": "23dd85f3-1a41-4ea0-b7a9-062734ccfaf9", "message_id": "a8bdc41c-13b2-4c18-bfd9-054b9803038c", "created_at": 1721205487, "task_id": "3bf8a0bb-e73b-4690-9e66-4e429bad8ee7", "audio": ""}
-    ```
-    </CodeGroup>
-    ### Response Example(Agent Assistant)
-    <CodeGroup title="Response">
-    ```streaming {{ title: 'Response' }}
-    data: {"event": "message", "message_id": "5ad4cb98-f0c7-4085-b384-88c403be6290", "conversation_id": "45701982-8118-4bc5-8e9b-64562b4555f2", "answer": " I", "created_at": 1679586595}
-    data: {"event": "message", "message_id": "5ad4cb98-f0c7-4085-b384-88c403be6290", "conversation_id": "45701982-8118-4bc5-8e9b-64562b4555f2", "answer": "'m", "created_at": 1679586595}
-    data: {"event": "message", "message_id": "5ad4cb98-f0c7-4085-b384-88c403be6290", "conversation_id": "45701982-8118-4bc5-8e9b-64562b4555f2", "answer": " glad", "created_at": 1679586595}
-    data: {"event": "message", "message_id": "5ad4cb98-f0c7-4085-b384-88c403be6290", "conversation_id": "45701982-8118-4bc5-8e9b-64562b4555f2", "answer": " to", "created_at": 1679586595}
-    data: {"event": "message", "message_id": : "5ad4cb98-f0c7-4085-b384-88c403be6290", "conversation_id": "45701982-8118-4bc5-8e9b-64562b4555f2", "answer": " meet", "created_at": 1679586595}
-    data: {"event": "message", "message_id": : "5ad4cb98-f0c7-4085-b384-88c403be6290", "conversation_id": "45701982-8118-4bc5-8e9b-64562b4555f2", "answer": " you", "created_at": 1679586595}
-    data: {"event": "message_end", "id": "5e52ce04-874b-4d27-9045-b3bc80def685", "conversation_id": "45701982-8118-4bc5-8e9b-64562b4555f2", "metadata": {"usage": {"prompt_tokens": 1033, "prompt_unit_price": "0.001", "prompt_price_unit": "0.001", "prompt_price": "0.0010330", "completion_tokens": 135, "completion_unit_price": "0.002", "completion_price_unit": "0.001", "completion_price": "0.0002700", "total_tokens": 1168, "total_price": "0.0013030", "currency": "USD", "latency": 1.381760165997548}, "retriever_resources": [{"position": 1, "dataset_id": "101b4c97-fc2e-463c-90b1-5261a4cdcafb", "dataset_name": "iPhone", "document_id": "8dd1ad74-0b5f-4175-b735-7d98bbbb4e00", "document_name": "iPhone List", "segment_id": "ed599c7f-2766-4294-9d1d-e5235a61270a", "score": 0.98457545, "content": "\"Model\",\"Release Date\",\"Display Size\",\"Resolution\",\"Processor\",\"RAM\",\"Storage\",\"Camera\",\"Battery\",\"Operating System\"\n\"iPhone 13 Pro Max\",\"September 24, 2021\",\"6.7 inch\",\"1284 x 2778\",\"Hexa-core (2x3.23 GHz Avalanche + 4x1.82 GHz Blizzard)\",\"6 GB\",\"128, 256, 512 GB, 1TB\",\"12 MP\",\"4352 mAh\",\"iOS 15\""}]}}
-    data: {"event": "tts_message", "conversation_id": "23dd85f3-1a41-4ea0-b7a9-062734ccfaf9", "message_id": "a8bdc41c-13b2-4c18-bfd9-054b9803038c", "created_at": 1721205487, "task_id": "3bf8a0bb-e73b-4690-9e66-4e429bad8ee7", "audio": "qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq"}
-    data: {"event": "tts_message_end", "conversation_id": "23dd85f3-1a41-4ea0-b7a9-062734ccfaf9", "message_id": "a8bdc41c-13b2-4c18-bfd9-054b9803038c", "created_at": 1721205487, "task_id": "3bf8a0bb-e73b-4690-9e66-4e429bad8ee7", "audio": ""}
-  ```
-    </CodeGroup>
   </Col>
 </Row>
 
 ---
+
 <Heading
   url='/files/upload'
   method='POST'
@@ -273,72 +245,69 @@ import { Row, Col, Properties, Property, Heading, SubProperty, Paragraph } from 
 />
 <Row>
   <Col>
+    파일을 업로드합니다(현재는 이미지만 지원). 메시지 전송 시 사용되며, 이미지와 텍스트의 멀티모달 이해를 가능하게 합니다. 
+    png, jpg, jpeg, webp, gif 형식을 지원합니다.
+    업로드된 파일은 현재 최종 사용자만 사용할 수 있습니다.
 
- 파일을 업로드합니다(현재는 이미지만 지원). 메시지 전송 시 사용되며, 이미지와 텍스트의 멀티모달 이해를 가능하게 합니다. 
- png, jpg, jpeg, webp, gif 형식을 지원합니다.
- 업로드된 파일은 현재 최종 사용자만 사용할 수 있습니다.
+    ### Request Body
+    이 인터페이스는 `multipart/form-data` 요청이 필요합니다.
+    
+    <Properties>
+      <Property name='file' type='File'>
+        업로드할 파일.
+      </Property>
+      <Property name='user' type='string'>
+        사용자 식별자로, 개발자의 규칙에 따라 정의되며 애플리케이션 내에서 고유해야 합니다.
+      </Property>
+    </Properties>
 
- ### Request Body
-이 인터페이스는 `multipart/form-data` 요청이 필요합니다.
-- `file` (File) 필수
-  업로드할 파일.
-- `user` (string) 필수
-  사용자 식별자로, 개발자의 규칙에 따라 정의되며 애플리케이션 내에서 고유해야 합니다.
+    ### Response
+    업로드 성공 시 서버는 파일의 ID와 관련 정보를 반환합니다.
+    - `id` (uuid) ID
+    - `name` (string) 파일 이름
+    - `size` (int) 파일 크기(바이트)
+    - `extension` (string) 파일 확장자
+    - `mime_type` (string) 파일 mime-type
+    - `created_by` (uuid) 최종 사용자 ID
+    - `created_at` (timestamp) 생성 타임스탬프, 예: 1705395332
 
-  ### Response
-  업로드 성공 시 서버는 파일의 ID와 관련 정보를 반환합니다.
-  - `id` (uuid) ID
-  - `name` (string) 파일 이름
-  - `size` (int) 파일 크기(바이트)
-  - `extension` (string) 파일 확장자
-  - `mime_type` (string) 파일 mime-type
-  - `created_by` (uuid) 최종 사용자 ID
-  - `created_at` (timestamp) 생성 타임스탬프, 예: 1705395332
-
-  ### 에러
-  - 400, `no_file_uploaded`, 파일을 제공해야 함
-  - 400, `too_many_files`, 현재는 하나의 파일만 허용됨
-  - 400, `unsupported_preview`, 파일이 미리보기를 지원하지 않음
-  - 400, `unsupported_estimate`, 파일이 추정을 지원하지 않음
-  - 413, `file_too_large`, 파일이 너무 큼
-  - 415, `unsupported_file_type`, 지원되지 않는 확장자, 현재는 문서 파일만 허용됨
-  - 503, `s3_connection_failed`, S3 서비스에 연결할 수 없음
-  - 503, `s3_permission_denied`, S3에 파일을 업로드할 권한 없음
-  - 503, `s3_file_too_large`, 파일이 S3 크기 제한을 초과함
-  - 500, 내부 서버 오류
-
+    ### 에러
+    - 400, `no_file_uploaded`, 파일을 제공해야 함
+    - 400, `too_many_files`, 현재는 하나의 파일만 허용됨
+    - 400, `unsupported_preview`, 파일이 미리보기를 지원하지 않음
+    - 400, `unsupported_estimate`, 파일이 추정을 지원하지 않음
+    - 413, `file_too_large`, 파일이 너무 큼
+    - 415, `unsupported_file_type`, 지원되지 않는 확장자
+    - 503, `s3_connection_failed`, S3 서비스에 연결할 수 없음
+    - 503, `s3_permission_denied`, S3에 파일을 업로드할 권한 없음
+    - 503, `s3_file_too_large`, 파일이 S3 크기 제한을 초과함
+    - 500, 내부 서버 오류
   </Col>
   <Col sticky>
-  ### Request Example
-  <CodeGroup title="Request" tag="POST" label="/files/upload" targetCode={`curl -X POST '${props.appDetail.api_base_url}/files/upload' \\\n--header 'Authorization: Bearer {api_key}' \\\n--form 'file=@localfile;type=image/[png|jpeg|jpg|webp|gif] \\\n--form 'user=abc-123'`}>
-
-    ```bash {{ title: 'cURL' }}
-    curl -X POST '${props.appDetail.api_base_url}/files/upload' \
-    --header 'Authorization: Bearer {api_key}' \
-    --form 'file=@"/path/to/file"'
-    ```
-
+    <CodeGroup title="Request" tag="POST" label="/files/upload">
+      ```bash {{ title: 'cURL' }}
+      curl -X POST '${props.appDetail.api_base_url}/files/upload' \
+      --header 'Authorization: Bearer {api_key}' \
+      --form 'file=@localfile;type=image/png' \
+      --form 'user=abc-123'
+      ```
     </CodeGroup>
 
-
-  ### Response Example
-  <CodeGroup title="Response">
-    ```json {{ title: 'Response' }}
-    {
-      "id": "72fa9618-8f89-4a37-9b33-7e1178a24a67",
-      "name": "example.png",
-      "size": 1024,
-      "extension": "png",
-      "mime_type": "image/png",
-      "created_by": "6ad1ab0a-73ff-4ac1-b9e4-cdb312f71f13",
-      "created_at": 1577836800,
-    }
-  ```
-  </CodeGroup>
+    <CodeGroup title="Response">
+      ```json {{ title: 'Response' }}
+      {
+        "id": "72fa9618-8f89-4a37-9b33-7e1178a24a67",
+        "name": "example.png",
+        "size": 1024,
+        "extension": "png",
+        "mime_type": "image/png",
+        "created_by": "6ad1ab0a-73ff-4ac1-b9e4-cdb312f71f13",
+        "created_at": 1577836800
+      }
+      ```
+    </CodeGroup>
   </Col>
 </Row>
----
-
 <Heading
   url='/chat-messages/:task_id/stop'
   method='POST'
@@ -684,7 +653,6 @@ import { Row, Col, Properties, Property, Heading, SubProperty, Paragraph } from 
       <Property name='user' type='string' key='user'>
           사용자 식별자로, 개발자의 규칙에 따라 정의되며 애플리케이션 내에서 고유해야 합니다.
       </Property>          
-      </Property>
       <Property name='last_id' type='string' key='last_id'>
            (선택사항) 현재 페이지의 마지막 기록 ID, 기본값은 null입니다.
       </Property>
@@ -905,7 +873,7 @@ import { Row, Col, Properties, Property, Heading, SubProperty, Paragraph } from 
     <CodeGroup title="Request" tag="POST" label="/audio-to-text" targetCode={`curl -X POST '${props.appDetail.api_base_url}/audio-to-text' \\\n--header 'Authorization: Bearer {api_key}' \\\n--form 'file=@localfile;type=audio/[mp3|mp4|mpeg|mpga|m4a|wav|webm]'`}>
 
     ```bash {{ title: 'cURL' }}
-    curl -X POST '${props.appDetail.api_base_url}/conversations/name' \
+    curl -X POST '${props.appDetail.api_base_url}/audio-to-text' \
     --header 'Authorization: Bearer {api_key}' \
     --form 'file=@localfile;type=audio/mp3'
     ```
@@ -913,7 +881,7 @@ import { Row, Col, Properties, Property, Heading, SubProperty, Paragraph } from 
     </CodeGroup>
 
     <CodeGroup title="Response">
-    ```json {{ text: 'hello' }}
+    ```json {{ title: 'Response' }}
     {
       "text": ""
     }
@@ -946,7 +914,7 @@ import { Row, Col, Properties, Property, Heading, SubProperty, Paragraph } from 
       <Property name='user' type='string' key='user'>
          사용자 식별자로, 개발자가 정의하며 앱 내에서 고유성을 보장해야 합니다.
       </Property>
-      </Properties>
+    </Properties>
   </Col>
   <Col sticky>
 

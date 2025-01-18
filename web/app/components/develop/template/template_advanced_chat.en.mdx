@@ -1098,21 +1098,21 @@ import { Row, Col, Properties, Property, Heading, SubProperty, Paragraph } from 
 <Heading
   url='/meta'
   method='GET'
-  title='애플리케이션 메타 정보 조회'
+  title='Get Application Meta Information'
   name='#meta'
 />
 <Row>
   <Col>
-  이 애플리케이션의 도구 아이콘들을 조회하는데 사용됩니다
+  Used to get icons of tools in this application
 
   ### Response
-  - `tool_icons`(object[string]) 도구 아이콘들
+  - `tool_icons`(object[string]) tool icons
     - `tool_name` (string)
       - `icon` (object|string)
-        - (object) 아이콘 객체
-          - `background` (string) 16진수 형식의 배경색
-          - `content`(string) 이모지
-        - (string) 아이콘 URL
+        - (object) icon object
+          - `background` (string) background color in hex format
+          - `content`(string) emoji
+        - (string) url of icon
   </Col>
   <Col>
   <CodeGroup title="Request" tag="GET" label="/meta" targetCode={`curl -X GET '${props.appDetail.api_base_url}/meta' \\\n-H 'Authorization: Bearer {api_key}'`}>
