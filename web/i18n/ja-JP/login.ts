@@ -1,6 +1,6 @@
 const translation = {
   pageTitle: 'はじめましょう！👋',
-  welcome: 'Difyへようこそ。続行するにはログインしてください。',
+  welcome: 'PBTへようこそ。続行するにはログインしてください。',
   email: 'メールアドレス',
   emailPlaceholder: 'メールアドレスを入力してください',
   password: 'パスワード',

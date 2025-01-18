@@ -9,11 +9,11 @@ const translation = {
     workflow: '워크플로우',
   },
   // [수정] 삭제
-  //contribute: {
-  //  line1: '저는 Dify에',
-  //  line2: '도구를 기여하는데 관심이 있습니다.',
-  //  viewGuide: '가이드 보기',
-  //},
+  contribute: {
+    line1: '',
+    line2: '',
+    viewGuide: '',
+  },
   author: '저자',
   auth: {
     unauthorized: '인증되지 않음',

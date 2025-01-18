@@ -1,7 +1,7 @@
 const translation = {
   title: 'ツール',
   createCustomTool: 'カスタムツールを作成する',
-  customToolTip: 'Difyカスタムツールの詳細',
+  customToolTip: 'PBTカスタムツールの詳細',
   type: {
     all: 'すべて',
     builtIn: '組み込み',
@@ -9,9 +9,9 @@ const translation = {
     workflow: 'ワークフロー',
   },
   contribute: {
-    line1: '私は',
-    line2: 'Difyへのツールの貢献に興味があります。',
-    viewGuide: 'ガイドを見る',
+    line1: '',
+    line2: '',
+    viewGuide: '',
   },
   author: '著者',
   auth: {
