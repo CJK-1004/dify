@@ -3,7 +3,7 @@ import { Row, Col, Properties, Property, Heading, SubProperty, Paragraph } from 
 
 # Workflow App API
 
-Workflow applications offers non-session support and is ideal for translation, article writing, summarization AI, and more.
+워크플로우 애플리케이션은 세션을 지원하지 않으며, 번역, 글쓰기, 요약 AI 등에 적합합니다.
 
 <div>
   ### Base URL
@@ -14,10 +14,10 @@ Workflow applications offers non-session support and is ideal for translation, a
 
   ### Authentication
 
-  The Service API uses `API-Key` authentication.
-  <i>**Strongly recommend storing your API Key on the server-side, not shared or stored on the client-side, to avoid possible API-Key leakage that can lead to serious consequences.**</i>
+  서비스 API는 `API-Key` 인증을 사용합니다.
+  <i>**API Key는 서버 측에 저장하고, 클라이언트 측에서 공유하거나 저장하지 않을 것을 강력히 권장합니다. API Key 유출은 심각한 결과를 초래할 수 있습니다.**</i>
 
-  For all API requests, include your API Key in the `Authorization` HTTP Header, as shown below:
+  모든 API 요청에서 아래와 같이 HTTP 헤더의 `Authorization`에 API Key를 포함해야 합니다.
 
   <CodeGroup title="Code">
     ```javascript
@@ -37,142 +37,144 @@ Workflow applications offers non-session support and is ideal for translation, a
 />
 <Row>
   <Col>
-    Execute workflow, cannot be executed without a published workflow.
+  워크플로우를 실행합니다. 게시된 워크플로우가 없으면 실행할 수 없습니다.
 
     ### Request Body
-      - `inputs` (object) Required
-        Allows the entry of various variable values defined by the App.
-        The `inputs` parameter contains multiple key/value pairs, with each key corresponding to a specific variable and each value being the specific value for that variable.
-        The workflow application requires at least one key/value pair to be inputted.
-        If the variable is of File type, specify an object that has the keys described in `files` below.
-      - `response_mode` (string) Required
-        The mode of response return, supporting:
-        - `streaming` Streaming mode (recommended), implements a typewriter-like output through SSE ([Server-Sent Events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events)).
-        - `blocking` Blocking mode, returns result after execution is complete. (Requests may be interrupted if the process is long)
-        <i>Due to Cloudflare restrictions, the request will be interrupted without a return after 100 seconds.</i>
-      - `user` (string) Required
-        User identifier, used to define the identity of the end-user for retrieval and statistics.
-        Should be uniquely defined by the developer within the application.
-      - `files` (array[object]) Optional
-        File list, suitable for inputting files combined with text understanding and answering questions, available only when the model supports file parsing and understanding capability.
-          - `type` (string) Supported type: 
+      - `inputs` (object) 필수
+        앱에서 정의한 다양한 변수값을 입력할 수 있습니다.
+        `inputs` 파라미터는 여러 개의 키/값 쌍을 포함하며, 각 키는 특정 변수에 해당하고 각 값은 해당 변수의 구체적인 값입니다.
+        워크플로우 애플리케이션은 최소 하나의 키/값 쌍이 입력되어야 합니다.
+        변수가 파일 타입인 경우, 아래 `files`에 설명된 키를 가진 객체를 지정하세요.
+
+      - `response_mode` (string) 필수
+        응답 반환 모드를 지정합니다:
+        - `streaming` 스트리밍 모드 (권장), SSE([Server-Sent Events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events))를 통해 타자기와 같은 출력을 구현합니다.
+        - `blocking` 블로킹 모드, 실행이 완료된 후 결과를 반환합니다. (프로세스가 길면 요청이 중단될 수 있음)
+        <i>Cloudflare 제한으로 인해 100초 후에는 반환 없이 요청이 중단됩니다.</i>
+
+      - `user` (string) 필수
+        사용자 식별자로, 검색 및 통계를 위한 최종 사용자의 신원을 정의하는 데 사용됩니다.
+        개발자가 애플리케이션 내에서 고유하게 정의해야 합니다.
+
+      - `files` (array[object]) 선택
+        파일 목록으로, 텍스트 이해 및 질문 답변과 결합된 파일 입력에 적합하며, 모델이 파일 파싱 및 이해 기능을 지원하는 경우에만 사용 가능합니다.
+          - `type` (string) 지원되는 타입: 
             - `document` ('TXT', 'MD', 'MARKDOWN', 'PDF', 'HTML', 'XLSX', 'XLS', 'DOCX', 'CSV', 'EML', 'MSG', 'PPTX', 'PPT', 'XML', 'EPUB')
             - `image` ('JPG', 'JPEG', 'PNG', 'GIF', 'WEBP', 'SVG')
             - `audio` ('MP3', 'M4A', 'WAV', 'WEBM', 'AMR')
             - `video` ('MP4', 'MOV', 'MPEG', 'MPGA')
-            - `custom` (Other file types)
-          - `transfer_method` (string) Transfer method, `remote_url` for image URL / `local_file` for file upload
-          - `url` (string) Image URL (when the transfer method is `remote_url`)
-          - `upload_file_id` (string) Uploaded file ID, which must be obtained by uploading through the File Upload API in advance (when the transfer method is `local_file`)
+            - `custom` (기타 파일 타입)
+          - `transfer_method` (string) 전송 방식, 이미지 URL의 경우 `remote_url` / 파일 업로드의 경우 `local_file`
+          - `url` (string) 이미지 URL (전송 방식이 `remote_url`인 경우)
+          - `upload_file_id` (string) 업로드된 파일 ID, File Upload API를 통해 미리 업로드하여 얻어야 함 (전송 방식이 `local_file`인 경우)
 
     ### Response
-    When `response_mode` is `blocking`, return a CompletionResponse object.
-    When `response_mode` is `streaming`, return a ChunkCompletionResponse stream.
+    `response_mode`가 `blocking`일 때는 CompletionResponse 객체를 반환합니다.
+    `response_mode`가 `streaming`일 때는 ChunkCompletionResponse 스트림을 반환합니다.
 
     ### CompletionResponse
-    Returns the App result, `Content-Type` is `application/json`.
-    - `workflow_run_id` (string) Unique ID of workflow execution
-    - `task_id` (string) Task ID, used for request tracking and the below Stop Generate API
-    - `data` (object) detail of result
-      - `id` (string) ID of workflow execution
-      - `workflow_id` (string) ID of related workflow
-      - `status` (string) status of execution, `running` / `succeeded` / `failed` / `stopped`
-      - `outputs` (json) Optional content of output
-      - `error` (string) Optional reason of error
-      - `elapsed_time` (float) Optional total seconds to be used
-      - `total_tokens` (int) Optional tokens to be used
-      - `total_steps` (int) default 0
-      - `created_at` (timestamp) start time
-      - `finished_at` (timestamp) end time
-
+    앱 실행 결과를 반환하며, `Content-Type`은 `application/json`입니다.
+    - `workflow_run_id` (string) 워크플로우 실행의 고유 ID
+    - `task_id` (string) 태스크 ID, 요청 추적 및 아래의 생성 중단 API에 사용됨
+    - `data` (object) 결과 상세 정보
+      - `id` (string) 워크플로우 실행 ID
+      - `workflow_id` (string) 관련 워크플로우 ID
+      - `status` (string) 실행 상태, `running` / `succeeded` / `failed` / `stopped`
+      - `outputs` (json) 선택적 출력 내용
+      - `error` (string) 선택적 오류 사유
+      - `elapsed_time` (float) 선택적 총 소요 시간(초)
+      - `total_tokens` (int) 선택적 사용된 토큰 수
+      - `total_steps` (int) 기본값 0
+      - `created_at` (timestamp) 시작 시간
+      - `finished_at` (timestamp) 종료 시간
     ### ChunkCompletionResponse
-    Returns the stream chunks outputted by the App, `Content-Type` is `text/event-stream`.
-    Each streaming chunk starts with `data:`, separated by two newline characters `\n\n`, as shown below:
+    앱에서 출력되는 스트림 청크를 반환하며, `Content-Type`은 `text/event-stream`입니다.
+    각 스트리밍 청크는 `data:`로 시작하며, 두 개의 개행 문자 `\n\n`로 구분됩니다. 아래 예시와 같습니다:
     <CodeGroup>
     ```streaming {{ title: 'Response' }}
     data: {"event": "message", "task_id": "900bbd43-dc0b-4383-a372-aa6e6c414227", "id": "663c5084-a254-4040-8ad3-51f2a3c1a77c", "answer": "Hi", "created_at": 1705398420}\n\n
     ```
     </CodeGroup>
-    The structure of the streaming chunks varies depending on the `event`:
-    - `event: workflow_started` workflow starts execution
-      - `task_id` (string) Task ID, used for request tracking and the below Stop Generate API
-      - `workflow_run_id` (string) Unique ID of workflow execution
-      - `event` (string) fixed to `workflow_started`
-      - `data` (object) detail
-        - `id` (string) Unique ID of workflow execution
-        - `workflow_id` (string) ID of related workflow
-        - `sequence_number` (int) Self-increasing serial number, self-increasing in the App, starting from 1
-        - `created_at` (timestamp) Creation timestamp, e.g., 1705395332
-    - `event: node_started` node execution started
-      - `task_id` (string) Task ID, used for request tracking and the below Stop Generate API
-      - `workflow_run_id` (string) Unique ID of workflow execution
-      - `event` (string) fixed to `node_started`
-      - `data` (object) detail
-        - `id` (string) Unique ID of workflow execution
-        - `node_id` (string) ID of node
-        - `node_type` (string) type of node
-        - `title` (string) name of node
-        - `index` (int) Execution sequence number, used to display Tracing Node sequence
-        - `predecessor_node_id` (string) optional Prefix node ID, used for canvas display execution path
-        - `inputs` (object) Contents of all preceding node variables used in the node
-        - `created_at` (timestamp) timestamp of start, e.g., 1705395332
-    - `event: node_finished` node execution ends, success or failure in different states in the same event
-      - `task_id` (string) Task ID, used for request tracking and the below Stop Generate API
-      - `workflow_run_id` (string) Unique ID of workflow execution
-      - `event` (string) fixed to `node_finished`
-      - `data` (object) detail
-        - `id` (string) Unique ID of workflow execution
-        - `node_id` (string) ID of node
-        - `node_type` (string) type of node
-        - `title` (string) name of node
-        - `index` (int) Execution sequence number, used to display Tracing Node sequence
-        - `predecessor_node_id` (string) optional Prefix node ID, used for canvas display execution path
-        - `inputs` (object) Contents of all preceding node variables used in the node
-        - `process_data` (json) Optional node process data
-        - `outputs` (json) Optional content of output
-        - `status` (string) status of execution, `running` / `succeeded` / `failed` / `stopped`
-        - `error` (string) Optional reason of error
-        - `elapsed_time` (float) Optional total seconds to be used
-        - `execution_metadata` (json) meta data
-          - `total_tokens` (int) optional tokens to be used
-          - `total_price` (decimal) optional Total cost
-          - `currency` (string) optional e.g. `USD` / `RMB`
-        - `created_at` (timestamp) timestamp of start, e.g., 1705395332
-    - `event: workflow_finished` workflow execution ends, success or failure in different states in the same event
-      - `task_id` (string) Task ID, used for request tracking and the below Stop Generate API
-      - `workflow_run_id` (string) Unique ID of workflow execution
-      - `event` (string) fixed to `workflow_finished`
-      - `data` (object) detail
-        - `id` (string) ID of workflow execution
-        - `workflow_id` (string) ID of related workflow
-        - `status` (string) status of execution, `running` / `succeeded` / `failed` / `stopped`
-        - `outputs` (json) Optional content of output
-        - `error` (string) Optional reason of error
-        - `elapsed_time` (float) Optional total seconds to be used
-        - `total_tokens` (int) Optional tokens to be used
-        - `total_steps` (int) default 0
-        - `created_at` (timestamp) start time
-        - `finished_at` (timestamp) end time
-    - `event: tts_message` TTS audio stream event, that is, speech synthesis output. The content is an audio block in Mp3 format, encoded as a base64 string. When playing, simply decode the base64 and feed it into the player. (This message is available only when auto-play is enabled)
-      - `task_id` (string) Task ID, used for request tracking and the stop response interface below
-      - `message_id` (string) Unique message ID
-      - `audio` (string) The audio after speech synthesis, encoded in base64 text content, when playing, simply decode the base64 and feed it into the player
-      - `created_at` (int) Creation timestamp, e.g.: 1705395332
-    - `event: tts_message_end` TTS audio stream end event, receiving this event indicates the end of the audio stream.
-      - `task_id` (string) Task ID, used for request tracking and the stop response interface below
-      - `message_id` (string) Unique message ID
-      - `audio` (string) The end event has no audio, so this is an empty string
-      - `created_at` (int) Creation timestamp, e.g.: 1705395332
-    - `event: ping` Ping event every 10 seconds to keep the connection alive.
+     스트리밍 청크의 구조는 `event`에 따라 다릅니다:
+    - `event: workflow_started` 워크플로우 실행 시작
+      - `task_id` (string) 태스크 ID, 요청 추적 및 아래의 생성 중단 API에 사용됨
+      - `workflow_run_id` (string) 워크플로우 실행의 고유 ID
+      - `event` (string) `workflow_started`로 고정됨
+      - `data` (object) 상세 정보
+        - `id` (string) 워크플로우 실행의 고유 ID
+        - `workflow_id` (string) 관련 워크플로우 ID
+        - `sequence_number` (int) 자동 증가 일련번호, 앱 내에서 1부터 시작하여 자동 증가
+        - `created_at` (timestamp) 생성 타임스탬프, 예: 1705395332
+    - `event: node_started` 노드 실행 시작
+      - `task_id` (string) 태스크 ID, 요청 추적 및 아래의 생성 중단 API에 사용됨
+      - `workflow_run_id` (string) 워크플로우 실행의 고유 ID
+      - `event` (string) `node_started`로 고정됨
+      - `data` (object) 상세 정보
+        - `id` (string) 워크플로우 실행의 고유 ID
+        - `node_id` (string) 노드 ID
+        - `node_type` (string) 노드 타입
+        - `title` (string) 노드 이름
+        - `index` (int) 실행 순서 번호, 추적 노드 순서 표시에 사용
+        - `predecessor_node_id` (string) 선택적 이전 노드 ID, 캔버스 실행 경로 표시에 사용
+        - `inputs` (object) 노드에서 사용된 모든 이전 노드 변수의 내용
+        - `created_at` (timestamp) 시작 타임스탬프, 예: 1705395332
+    - `event: node_finished` 노드 실행 종료, 동일 이벤트에서 성공 또는 실패 등 다른 상태로 종료
+      - `task_id` (string) 태스크 ID, 요청 추적 및 아래의 생성 중단 API에 사용됨
+      - `workflow_run_id` (string) 워크플로우 실행의 고유 ID
+      - `event` (string) `node_finished`로 고정됨
+      - `data` (object) 상세 정보
+        - `id` (string) 워크플로우 실행의 고유 ID
+        - `node_id` (string) 노드 ID
+        - `node_type` (string) 노드 타입
+        - `title` (string) 노드 이름
+        - `index` (int) 실행 순서 번호, 추적 노드 순서 표시에 사용
+        - `predecessor_node_id` (string) 선택적 이전 노드 ID, 캔버스 실행 경로 표시에 사용
+        - `inputs` (object) 노드에서 사용된 모든 이전 노드 변수의 내용
+        - `process_data` (json) 선택적 노드 처리 데이터
+        - `outputs` (json) 선택적 출력 내용
+        - `status` (string) 실행 상태, `running` / `succeeded` / `failed` / `stopped`
+        - `error` (string) 선택적 오류 사유
+        - `elapsed_time` (float) 선택적 총 소요 시간(초)
+        - `execution_metadata` (json) 메타 데이터
+          - `total_tokens` (int) 선택적 사용된 토큰 수
+          - `total_price` (decimal) 선택적 총 비용
+          - `currency` (string) 선택적 통화, 예: `USD` / `RMB`
+        - `created_at` (timestamp) 시작 타임스탬프, 예: 1705395332
+    - `event: workflow_finished` 워크플로우 실행 종료, 동일 이벤트에서 성공 또는 실패 등 다른 상태로 종료
+      - `task_id` (string) 태스크 ID, 요청 추적 및 아래의 생성 중단 API에 사용됨
+      - `workflow_run_id` (string) 워크플로우 실행의 고유 ID
+      - `event` (string) `workflow_finished`로 고정됨
+      - `data` (object) 상세 정보
+        - `id` (string) 워크플로우 실행 ID
+        - `workflow_id` (string) 관련 워크플로우 ID
+        - `status` (string) 실행 상태, `running` / `succeeded` / `failed` / `stopped`
+        - `outputs` (json) 선택적 출력 내용
+        - `error` (string) 선택적 오류 사유
+        - `elapsed_time` (float) 선택적 총 소요 시간(초)
+        - `total_tokens` (int) 선택적 사용된 토큰 수
+        - `total_steps` (int) 기본값 0
+        - `created_at` (timestamp) 시작 시간
+        - `finished_at` (timestamp) 종료 시간
+    - `event: tts_message` TTS 오디오 스트림 이벤트, 즉 음성 합성 출력입니다. 내용은 Mp3 형식의 오디오 블록으로, base64 문자열로 인코딩됩니다. 재생 시에는 단순히 base64를 디코딩하여 플레이어에 입력하면 됩니다. (이 메시지는 자동 재생이 활성화된 경우에만 사용 가능)
+      - `task_id` (string) 태스크 ID, 요청 추적 및 아래의 응답 중단 인터페이스에 사용됨
+      - `message_id` (string) 고유 메시지 ID
+      - `audio` (string) 음성 합성 후의 오디오로, base64 텍스트 내용으로 인코딩됨. 재생 시에는 단순히 base64를 디코딩하여 플레이어에 입력
+      - `created_at` (int) 생성 타임스탬프, 예: 1705395332
+    - `event: tts_message_end` TTS 오디오 스트림 종료 이벤트, 이 이벤트를 수신하면 오디오 스트림이 종료됨을 나타냅니다.
+      - `task_id` (string) 태스크 ID, 요청 추적 및 아래의 응답 중단 인터페이스에 사용됨
+      - `message_id` (string) 고유 메시지 ID
+      - `audio` (string) 종료 이벤트에는 오디오가 없으므로 빈 문자열
+      - `created_at` (int) 생성 타임스탬프, 예: 1705395332
+    - `event: ping` 연결을 유지하기 위해 10초마다 발생하는 핑 이벤트
 
     ### Errors
-    - 400, `invalid_param`, abnormal parameter input
-    - 400, `app_unavailable`, App configuration unavailable
-    - 400, `provider_not_initialize`, no available model credential configuration
-    - 400, `provider_quota_exceeded`, model invocation quota insufficient
-    - 400, `model_currently_not_support`, current model unavailable
-    - 400, `workflow_request_error`, workflow execution failed
-    - 500, internal server error
+    - 400, `invalid_param`, 비정상적인 파라미터 입력
+    - 400, `app_unavailable`, 앱 구성을 사용할 수 없음
+    - 400, `provider_not_initialize`, 사용 가능한 모델 자격 증명 구성 없음
+    - 400, `provider_quota_exceeded`, 모델 호출 할당량 부족
+    - 400, `model_currently_not_support`, 현재 모델을 사용할 수 없음
+    - 400, `workflow_request_error`, 워크플로우 실행 실패
+    - 500, 내부 서버 오류 
 
   </Col>
   <Col sticky>
@@ -329,21 +331,22 @@ Workflow applications offers non-session support and is ideal for translation, a
 />
 <Row>
   <Col>
-    Retrieve the current execution results of a workflow task based on the workflow execution ID.
+    워크플로우 실행 ID를 기반으로 워크플로우 태스크의 현재 실행 결과를 조회합니다.
+    
     ### Path
-    - `workflow_id` (string) Workflow ID, can be obtained from the streaming chunk return
+      - `workflow_id` (string) 워크플로우 ID, 스트리밍 청크 반환값에서 얻을 수 있음
     ### Response
-    - `id` (string) ID of workflow execution
-    - `workflow_id` (string) ID of related workflow
-    - `status` (string) status of execution, `running` / `succeeded` / `failed` / `stopped`
-    - `inputs` (json) content of input
-    - `outputs` (json) content of output
-    - `error` (string) reason of error
-    - `total_steps` (int) total steps of task
-    - `total_tokens` (int) total tokens to be used
-    - `created_at` (timestamp) start time
-    - `finished_at` (timestamp) end time
-    - `elapsed_time` (float) total seconds to be used
+    - `id` (string) 워크플로우 실행 ID
+    - `workflow_id` (string) 관련 워크플로우 ID
+    - `status` (string) 실행 상태, `running` / `succeeded` / `failed` / `stopped`
+    - `inputs` (json) 입력 내용
+    - `outputs` (json) 출력 내용
+    - `error` (string) 오류 사유
+    - `total_steps` (int) 태스크의 총 단계 수
+    - `total_tokens` (int) 사용된 총 토큰 수
+    - `created_at` (timestamp) 시작 시간
+    - `finished_at` (timestamp) 종료 시간
+    - `elapsed_time` (float) 총 소요 시간(초)
   </Col>
   <Col sticky>
     ### Request Example
@@ -386,12 +389,12 @@ Workflow applications offers non-session support and is ideal for translation, a
 />
 <Row>
   <Col>
-  Only supported in streaming mode.
+  스트리밍 모드에서만 지원됩니다.
   ### Path
-  - `task_id` (string) Task ID, can be obtained from the streaming chunk return
+  - `task_id` (string) 태스크 ID, 스트리밍 청크 반환값에서 얻을 수 있음
   ### Request Body
-  - `user` (string) Required
-    User identifier, used to define the identity of the end-user, must be consistent with the user passed in the send message interface.
+  - `user` (string) 필수
+    사용자 식별자로, 최종 사용자의 신원을 정의하는 데 사용되며, 메시지 전송 인터페이스에 전달된 사용자와 일치해야 합니다.
   ### Response
   - `result` (string) Always returns "success"
   </Col>
@@ -429,39 +432,38 @@ Workflow applications offers non-session support and is ideal for translation, a
 />
 <Row>
   <Col>
-  Upload a file for use when sending messages, enabling multimodal understanding of images and text.
-  Supports any formats that are supported by your workflow.
-  Uploaded files are for use by the current end-user only.
+   메시지 전송 시 사용할 파일을 업로드하여 이미지와 텍스트의 멀티모달 이해를 가능하게 합니다.
+  워크플로우에서 지원하는 모든 형식을 지원합니다.
+  업로드된 파일은 현재 최종 사용자만 사용할 수 있습니다.
 
   ### Request Body
-  This interface requires a `multipart/form-data` request.
-  - `file` (File) Required
-    The file to be uploaded.
-  - `user` (string) Required
-    User identifier, defined by the developer's rules, must be unique within the application.
+  이 인터페이스는 `multipart/form-data` 요청이 필요합니다.
+  - `file` (File) 필수
+    업로드할 파일입니다.
+  - `user` (string) 필수
+    사용자 식별자로, 개발자의 규칙에 따라 정의되며 애플리케이션 내에서 고유해야 합니다.
 
   ### Response
-  After a successful upload, the server will return the file's ID and related information.
+   업로드가 성공하면 서버는 파일의 ID와 관련 정보를 반환합니다.
   - `id` (uuid) ID
-  - `name` (string) File name
-  - `size` (int) File size (bytes)
-  - `extension` (string) File extension
-  - `mime_type` (string) File mime-type
-  - `created_by` (uuid) End-user ID
-  - `created_at` (timestamp) Creation timestamp, e.g., 1705395332
+  - `name` (string) 파일 이름
+  - `size` (int) 파일 크기(바이트)
+  - `extension` (string) 파일 확장자
+  - `mime_type` (string) 파일 mime-type
+  - `created_by` (uuid) 최종 사용자 ID
+  - `created_at` (timestamp) 생성 타임스탬프, 예: 1705395332
 
   ### Errors
-  - 400, `no_file_uploaded`, a file must be provided
-  - 400, `too_many_files`, currently only one file is accepted
-  - 400, `unsupported_preview`, the file does not support preview
-  - 400, `unsupported_estimate`, the file does not support estimation
-  - 413, `file_too_large`, the file is too large
-  - 415, `unsupported_file_type`, unsupported extension, currently only document files are accepted
-  - 503, `s3_connection_failed`, unable to connect to S3 service
-  - 503, `s3_permission_denied`, no permission to upload files to S3
-  - 503, `s3_file_too_large`, file exceeds S3 size limit
-  - 500, internal server error
-
+  - 400, `no_file_uploaded`, 파일을 제공해야 함
+  - 400, `too_many_files`, 현재 하나의 파일만 허용됨
+  - 400, `unsupported_preview`, 파일이 미리보기를 지원하지 않음
+  - 400, `unsupported_estimate`, 파일이 추정을 지원하지 않음
+  - 413, `file_too_large`, 파일이 너무 큼
+  - 415, `unsupported_file_type`, 지원되지 않는 확장자, 현재 문서 파일만 허용됨
+  - 503, `s3_connection_failed`, S3 서비스에 연결할 수 없음
+  - 503, `s3_permission_denied`, S3에 파일을 업로드할 권한 없음
+  - 503, `s3_file_too_large`, 파일이 S3 크기 제한을 초과함
+  - 500, 내부 서버 오류
 
   </Col>
   <Col sticky>
@@ -504,7 +506,7 @@ Workflow applications offers non-session support and is ideal for translation, a
 />
 <Row>
   <Col>
-    Returns workflow logs, with the first page returning the latest `{limit}` messages, i.e., in reverse order.
+    워크플로우 로그를 반환하며, 첫 페이지는 최신 `{limit}` 개의 메시지를 반환합니다. 즉, 역순으로 반환됩니다.
 
     ### Query
 
@@ -512,43 +514,43 @@ Workflow applications offers non-session support and is ideal for translation, a
       <Property name='keyword' type='string' key='keyword'>
         Keyword to search
       </Property>
-      <Property name='status' type='string' key='status'>
-        succeeded/failed/stopped
+       <Property name='status' type='string' key='status'>
+        succeeded/failed/stopped (성공/실패/중단)
       </Property>
       <Property name='page' type='int' key='page'>
-        current page, default is 1.
+        현재 페이지, 기본값은 1입니다.
       </Property>
       <Property name='limit' type='int' key='limit'>
-          How many chat history messages to return in one request, default is 20.
+          한 번의 요청에서 반환할 채팅 기록 메시지의 수, 기본값은 20입니다.
       </Property>
     </Properties>
 
     ### Response
-  - `page` (int) Current page
-  - `limit` (int) Number of returned items, if input exceeds system limit, returns system limit amount
-  - `total` (int) Number of total items
-  - `has_more` (bool) Whether there is a next page
-  - `data` (array[object]) Log list
-    - `id` (string) ID
-    - `workflow_run` (object) Workflow run
+    - `page` (int) 현재 페이지
+    - `limit` (int) 반환된 항목 수, 입력이 시스템 제한을 초과하면 시스템 제한 수량을 반환
+    - `total` (int) 전체 항목 수
+    - `has_more` (bool) 다음 페이지 존재 여부
+    - `data` (array[object]) 로그 목록
       - `id` (string) ID
-      - `version` (string) Version
-      - `status` (string) status of execution, `running` / `succeeded` / `failed` / `stopped`
-      - `error` (string) Optional reason of error
-      - `elapsed_time` (float) total seconds to be used
-      - `total_tokens` (int) tokens to be used
-      - `total_steps` (int) default 0
-      - `created_at` (timestamp) start time
-      - `finished_at` (timestamp) end time
-    - `created_from` (string) Created from
-    - `created_by_role` (string) Created by role
-    - `created_by_account` (string) Optional Created by account
-    - `created_by_end_user` (object) Created by end user
-      - `id` (string) ID
-      - `type` (string) Type
-      - `is_anonymous` (bool) Is anonymous
-      - `session_id` (string) Session ID
-    - `created_at` (timestamp) create time
+      - `workflow_run` (object) 워크플로우 실행
+        - `id` (string) ID
+        - `version` (string) 버전
+        - `status` (string) 실행 상태, `running` / `succeeded` / `failed` / `stopped`
+        - `error` (string) 선택적 오류 사유
+        - `elapsed_time` (float) 총 소요 시간(초)
+        - `total_tokens` (int) 사용된 토큰 수
+        - `total_steps` (int) 기본값 0
+        - `created_at` (timestamp) 시작 시간
+        - `finished_at` (timestamp) 종료 시간
+      - `created_from` (string) 생성 출처
+      - `created_by_role` (string) 생성자 역할
+      - `created_by_account` (string) 선택적 생성자 계정
+      - `created_by_end_user` (object) 생성한 최종 사용자
+        - `id` (string) ID
+        - `type` (string) 유형
+        - `is_anonymous` (bool) 익명 여부
+        - `session_id` (string) 세션 ID
+      - `created_at` (timestamp) 생성 시간
   </Col>
   <Col sticky>
 
@@ -609,12 +611,12 @@ Workflow applications offers non-session support and is ideal for translation, a
 />
 <Row>
   <Col>
-  Used to get basic information about this application
+  애플리케이션의 기본 정보를 얻는 데 사용됩니다
 
   ### Response
-  - `name` (string) application name
-  - `description` (string) application description
-  - `tags` (array[string]) application tags
+  - `name` (string) 애플리케이션 이름
+  - `description` (string) 애플리케이션 설명
+  - `tags` (array[string]) 애플리케이션 태그
   </Col>
   <Col>
     <CodeGroup title="Request" tag="GET" label="/info" targetCode={`curl -X GET '${props.appDetail.api_base_url}/info' \\\n-H 'Authorization: Bearer {api_key}'`}>
@@ -648,37 +650,37 @@ Workflow applications offers non-session support and is ideal for translation, a
 />
 <Row>
   <Col>
-    Used at the start of entering the page to obtain information such as features, input parameter names, types, and default values.
+   페이지 진입 시작 시 기능, 입력 파라미터 이름, 타입 및 기본값과 같은 정보를 얻는 데 사용됩니다.
 
     ### Response
-    - `user_input_form` (array[object]) User input form configuration
-      - `text-input` (object) Text input control
-        - `label` (string) Variable display label name
-        - `variable` (string) Variable ID
-        - `required` (bool) Whether it is required
-        - `default` (string) Default value
-      - `paragraph` (object) Paragraph text input control
-        - `label` (string) Variable display label name
-        - `variable` (string) Variable ID
-        - `required` (bool) Whether it is required
-        - `default` (string) Default value
-      - `select` (object) Dropdown control
-        - `label` (string) Variable display label name
-        - `variable` (string) Variable ID
-        - `required` (bool) Whether it is required
-        - `default` (string) Default value
-        - `options` (array[string]) Option values
-    - `file_upload` (object) File upload configuration
-      - `image` (object) Image settings
-        Currently only supports image types: `png`, `jpg`, `jpeg`, `webp`, `gif`
-        - `enabled` (bool) Whether it is enabled
-        - `number_limits` (int) Image number limit, default is 3
-        - `transfer_methods` (array[string]) List of transfer methods, remote_url, local_file, must choose one
-    - `system_parameters` (object) System parameters
-      - `file_size_limit` (int) Document upload size limit (MB)
-      - `image_file_size_limit` (int) Image file upload size limit (MB)
-      - `audio_file_size_limit` (int) Audio file upload size limit (MB)
-      - `video_file_size_limit` (int) Video file upload size limit (MB)
+    - `user_input_form` (array[object]) 사용자 입력 폼 구성
+      - `text-input` (object) 텍스트 입력 컨트롤
+        - `label` (string) 변수 표시 레이블 이름
+        - `variable` (string) 변수 ID
+        - `required` (bool) 필수 여부
+        - `default` (string) 기본값
+      - `paragraph` (object) 문단 텍스트 입력 컨트롤
+        - `label` (string) 변수 표시 레이블 이름
+        - `variable` (string) 변수 ID
+        - `required` (bool) 필수 여부
+        - `default` (string) 기본값
+      - `select` (object) 드롭다운 컨트롤
+        - `label` (string) 변수 표시 레이블 이름
+        - `variable` (string) 변수 ID
+        - `required` (bool) 필수 여부
+        - `default` (string) 기본값
+        - `options` (array[string]) 옵션 값들
+    - `file_upload` (object) 파일 업로드 구성
+      - `image` (object) 이미지 설정
+        현재 지원되는 이미지 타입: `png`, `jpg`, `jpeg`, `webp`, `gif`
+        - `enabled` (bool) 활성화 여부
+        - `number_limits` (int) 이미지 수 제한, 기본값은 3
+        - `transfer_methods` (array[string]) 전송 방식 목록, remote_url, local_file 중 하나를 선택해야 함
+    - `system_parameters` (object) 시스템 파라미터
+      - `file_size_limit` (int) 문서 업로드 크기 제한 (MB)
+      - `image_file_size_limit` (int) 이미지 파일 업로드 크기 제한 (MB)
+      - `audio_file_size_limit` (int) 오디오 파일 업로드 크기 제한 (MB)
+      - `video_file_size_limit` (int) 비디오 파일 업로드 크기 제한 (MB)
 
   </Col>
   <Col sticky>
