@@ -37,42 +37,42 @@ import { Row, Col, Properties, Property, Heading, SubProperty, Paragraph } from 
 />
 <Row>
   <Col>
-    Send a request to the chat application.
+    채팅 애플리케이션에 요청을 보냅니다.
 
     ### Request Body
 
     <Properties>
       <Property name='query' type='string' key='query'>
-        User Input/Question content
+        사용자 입력/질문 내용
       </Property>
       <Property name='inputs' type='object' key='inputs'>
-          Allows the entry of various variable values defined by the App.
-          The `inputs` parameter contains multiple key/value pairs, with each key corresponding to a specific variable and each value being the specific value for that variable. Default `{}`
+          앱에서 정의한 다양한 변수값을 입력할 수 있습니다.
+          `inputs` 파라미터는 여러 개의 키/값 쌍을 포함하며, 각 키는 특정 변수에 해당하고 각 값은 해당 변수의 구체적인 값입니다. 기본값 `{}`
       </Property>
       <Property name='response_mode' type='string' key='response_mode'>
-        The mode of response return, supporting:
-        - `streaming` Streaming mode (recommended), implements a typewriter-like output through SSE ([Server-Sent Events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events)).
-        - `blocking` Blocking mode, returns result after execution is complete. (Requests may be interrupted if the process is long)
-        Due to Cloudflare restrictions, the request will be interrupted without a return after 100 seconds.
-        <i>Note: blocking mode is not supported in Agent Assistant mode</i>
+        응답 반환 모드로 다음을 지원합니다:
+        - `streaming` 스트리밍 모드(권장), SSE([Server-Sent Events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events))를 통해 타자기와 같은 출력을 구현합니다.
+        - `blocking` 블로킹 모드, 실행이 완료된 후 결과를 반환합니다. (처리 시간이 긴 경우 요청이 중단될 수 있음)
+        Cloudflare 제한으로 인해 100초 후에는 반환 없이 요청이 중단됩니다.
+        <i>참고: 블로킹 모드는 Agent Assistant 모드에서 지원되지 않습니다</i>
       </Property>
       <Property name='user' type='string' key='user'>
-          User identifier, used to define the identity of the end-user for retrieval and statistics.
-          Should be uniquely defined by the developer within the application.
+          사용자 식별자로, 조회와 통계를 위해 최종 사용자의 신원을 정의하는 데 사용됩니다.
+          개발자의 규칙에 따라 정의되며 애플리케이션 내에서 고유해야 합니다.
       </Property>
       <Property name='conversation_id' type='string' key='conversation_id'>
       Conversation ID, to continue the conversation based on previous chat records, it is necessary to pass the previous message's conversation_id.
       </Property>
       <Property name='files' type='array[object]' key='files'>
-          File list, suitable for inputting files (images) combined with text understanding and answering questions, available only when the model supports Vision capability.
-          - `type` (string) Supported type: `image` (currently only supports image type)
-          - `transfer_method` (string) Transfer method, `remote_url` for image URL / `local_file` for file upload
-          - `url` (string) Image URL (when the transfer method is `remote_url`)
-          - `upload_file_id` (string) Uploaded file ID, which must be obtained by uploading through the File Upload API in advance (when the transfer method is `local_file`)
+          텍스트 이해 및 질문 답변과 결합된 파일(이미지) 입력에 적합하며, 모델이 Vision 기능을 지원하는 경우에만 사용할 수 있습니다.
+          - `type` (string) 지원되는 타입: `image` (현재는 이미지 타입만 지원)
+          - `transfer_method` (string) 전송 방식, 이미지 URL의 경우 `remote_url` / 파일 업로드의 경우 `local_file`
+          - `url` (string) 이미지 URL (전송 방식이 `remote_url`인 경우)
+          - `upload_file_id` (string) 업로드된 파일 ID, File Upload API를 통해 미리 업로드하여 얻어야 함 (전송 방식이 `local_file`인 경우)
       </Property>
       <Property name='auto_generate_name' type='bool' key='auto_generate_name'>
-      Auto-generate title, default is `true`.
-      If set to `false`, can achieve async title generation by calling the conversation rename API and setting `auto_generate` to `true`.
+       제목 자동 생성 여부, 기본값은 `true`입니다.
+      `false`로 설정하면 대화 이름 변경 API를 호출하고 `auto_generate`를 `true`로 설정하여 비동기 제목 생성을 수행할 수 있습니다.
       </Property>
     </Properties>
 
