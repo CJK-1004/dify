@@ -1,14 +1,15 @@
 identity:
-  author: Dify
+  author: PBT
   name: youtube
   label:
     en_US: YouTube
     zh_Hans: YouTube
     pt_BR: YouTube
   description:
-    en_US: YouTube
+    en_US: YouTube는 전 세계에서 가장 큰 동영상 공유 사이트로, 사용자가 동영상을 업로드, 시청 및 공유할 수 있습니다.
     zh_Hans: YouTube（油管）是全球最大的视频分享网站，用户可以在上面上传、观看和分享视频。
     pt_BR: YouTube é o maior site de compartilhamento de vídeos do mundo, onde os usuários podem fazer upload, assistir e compartilhar vídeos.
+    ko_KR: YouTube는 전 세계에서 가장 큰 동영상 공유 사이트로, 사용자가 동영상을 업로드, 시청 및 공유할 수 있습니다.
   icon: icon.svg
   tags:
     - videos

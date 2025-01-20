@@ -1,12 +1,12 @@
 identity:
-  author: Pan YANG
+  author: PBT
   name: slack
   label:
     en_US: Slack
     zh_Hans: Slack
     pt_BR: Slack
   description:
-    en_US: Slack Webhook
+    en_US: 슬랙과 연결합니다.
     zh_Hans: Slack Webhook
     pt_BR: Slack Webhook
   icon: icon.svg

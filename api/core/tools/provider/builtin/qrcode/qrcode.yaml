@@ -1,14 +1,15 @@
 identity:
-  author: Bowen Liang
+  author: PBT
   name: qrcode
   label:
     en_US: QRCode
     zh_Hans: 二维码工具
     pt_BR: QRCode
   description:
-    en_US: A tool for generating QR code (quick-response code) image.
+    en_US: QR 코드(빠른 응답 코드) 이미지를 생성하는 도구입니다.
     zh_Hans: 一个二维码工具
     pt_BR: A tool for generating QR code (quick-response code) image.
+    ko_KR: QR 코드(빠른 응답 코드) 이미지를 생성하는 도구입니다.
   icon: icon.svg
   tags:
     - utilities

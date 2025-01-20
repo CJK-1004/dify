@@ -1,12 +1,12 @@
 identity:
-  author: Dify
+  author: PBT
   name: dalle
   label:
     en_US: DALL-E
     zh_Hans: DALL-E 绘画
     pt_BR: DALL-E
   description:
-    en_US: DALL-E art
+    en_US: DALL-E 를 사용해서, 이미지를 생성합니다.
     zh_Hans: DALL-E 绘画
     pt_BR: DALL-E art
   icon: icon.png

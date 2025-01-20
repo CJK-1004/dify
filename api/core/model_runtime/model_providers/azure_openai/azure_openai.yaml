@@ -10,6 +10,7 @@ help:
   title:
     en_US: Get your API key from Azure
     zh_Hans: 从 Azure 获取 API Key
+    ko_KR: Azure에서 API 키를 가져오세요
   url:
     en_US: https://azure.microsoft.com/en-us/products/ai-services/openai-service
 supported_model_types:

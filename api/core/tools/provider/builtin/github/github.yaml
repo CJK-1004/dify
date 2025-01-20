@@ -1,14 +1,15 @@
 identity:
-  author: CharlieWei
+  author: PBT
   name: github
   label:
     en_US: Github
     zh_Hans: Github
     pt_BR: Github
   description:
-    en_US: GitHub is an online software source code hosting service.
+    en_US: GitHub는 온라인 소프트웨어 소스 코드 호스팅 서비스입니다.
     zh_Hans: GitHub是一个在线软件源代码托管服务平台。
     pt_BR: GitHub é uma plataforma online para serviços de hospedagem de código fonte de software.
+    ko_KR: GitHub는 온라인 소프트웨어 소스 코드 호스팅 서비스입니다.
   icon: icon.svg
   tags:
     - utilities

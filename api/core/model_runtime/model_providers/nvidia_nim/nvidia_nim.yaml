@@ -4,6 +4,7 @@ label:
 description:
   en_US: NVIDIA NIM, a set of easy-to-use inference microservices.
   zh_Hans: NVIDIA NIM，一组易于使用的模型推理微服务。
+  ko_KR: NVIDIA NIM, 사용하기 쉬운 추론 마이크로서비스 세트입니다.
 icon_small:
   en_US: icon_s_en.svg
 icon_large:

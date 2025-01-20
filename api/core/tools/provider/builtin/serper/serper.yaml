@@ -1,14 +1,15 @@
 identity:
-  author: zhuhao
+  author: PBT
   name: serper
   label:
     en_US: Serper
     zh_Hans: Serper
     pt_BR: Serper
   description:
-    en_US: Serper is a powerful real-time search engine tool API that provides structured data from Google Search.
+    en_US: Serper는 Google 검색에서 구조화된 데이터를 제공하는 강력한 실시간 검색 엔진 도구 API입니다.
     zh_Hans: Serper 是一个强大的实时搜索引擎工具API，可提供来自 Google 搜索引擎搜索的结构化数据。
     pt_BR: Serper is a powerful real-time search engine tool API that provides structured data from Google Search.
+    ko_KR: Serper는 Google 검색에서 구조화된 데이터를 제공하는 강력한 실시간 검색 엔진 도구 API입니다.
   icon: icon.svg
   tags:
     - search

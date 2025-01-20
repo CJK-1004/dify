@@ -2,8 +2,9 @@ provider: upstage
 label:
   en_US: Upstage
 description:
-  en_US: Models provided by Upstage, such as Solar-1-mini-chat.
+  en_US: Upstage에서 제공하는 모델, 예를 들어 Solar-1-mini-chat.
   zh_Hans: Upstage 提供的模型，例如 Solar-1-mini-chat.
+  ko_KR: Upstage에서 제공하는 모델, 예를 들어 Solar-1-mini-chat.
 icon_small:
   en_US: icon_s_en.svg
 icon_large:

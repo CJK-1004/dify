@@ -1,12 +1,13 @@
 identity:
-  author: Ron Liu
+  author: PBT
   name: google_translate
   label:
     en_US: Google Translate
     zh_Hans: 谷歌翻译
   description:
-    en_US: Translate text using Google
+    en_US: Google을 사용하여 텍스트 번역합니다.
     zh_Hans: 使用 Google 进行翻译
+    ko_KR: Google을 사용하여 텍스트 번역
   icon: icon.svg
   tags:
     - utilities

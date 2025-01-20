@@ -1,12 +1,12 @@
 identity:
-  author: Yash Parmar
+  author: PBT
   name: arxiv
   label:
     en_US: ArXiv
     zh_Hans: ArXiv
     ja_JP: ArXiv
   description:
-    en_US: Access to a vast repository of scientific papers and articles in various fields of research.
+    en_US: 다양한 연구 분야의 과학 논문 및 기사에 대한 방대한 저장소에 접근합니다.
     zh_Hans: 访问各个研究领域大量科学论文和文章的存储库。
     ja_JP: 多様な研究分野の科学論文や記事の膨大なリポジトリへのアクセス。
   icon: icon.svg

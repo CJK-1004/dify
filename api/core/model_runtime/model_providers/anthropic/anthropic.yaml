@@ -2,8 +2,9 @@ provider: anthropic
 label:
   en_US: Anthropic
 description:
-  en_US: Anthropic’s powerful models, such as Claude 3.
+  en_US: Anthropic의 강력한 모델, 예를 들어 Claude 3.
   zh_Hans: Anthropic 的强大模型，例如 Claude 3。
+  ko_KR: Anthropic의 강력한 모델, 예를 들어 Claude 3.
 icon_small:
   en_US: icon_s_en.svg
 icon_large:
@@ -11,8 +12,9 @@ icon_large:
 background: "#F0F0EB"
 help:
   title:
-    en_US: Get your API Key from Anthropic
+    en_US: Anthropic에서 API Key를 가져오세요
     zh_Hans: 从 Anthropic 获取 API Key
+    ko_KR: Anthropic에서 API Key를 가져오세요
   url:
     en_US: https://console.anthropic.com/account/keys
 supported_model_types:
