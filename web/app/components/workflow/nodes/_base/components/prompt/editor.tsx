@@ -147,7 +147,9 @@ const Editor: FC<Props> = ({
                     popupContent={
                       <div>
                         <div>{t('workflow.common.enableJinja')}</div>
+                        {/* [수정]
                         <a className='text-[#155EEF]' target='_blank' href='https://jinja.palletsprojects.com/en/2.10.x/'>{t('workflow.common.learnMore')}</a>
+                        */} 
                       </div>
                     }
                     needsDelay

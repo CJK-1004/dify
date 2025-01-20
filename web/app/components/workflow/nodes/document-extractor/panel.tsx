@@ -77,7 +77,9 @@ const Panel: FC<NodePanelProps<DocExtractorNodeType>> = ({
             />
             <div className='mt-1 py-0.5 text-text-tertiary body-xs-regular'>
               {t(`${i18nPrefix}.supportFileTypes`, { types: supportTypesShowNames })}
+              {/* [수정]
               <a className='text-text-accent' href={link} target='_blank'>{t(`${i18nPrefix}.learnMore`)}</a>
+              */}
             </div>
           </>
         </Field>

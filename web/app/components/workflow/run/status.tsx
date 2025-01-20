@@ -133,6 +133,7 @@ const StatusPanel: FC<ResultProps> = ({
             <div className='my-2 h-[0.5px] bg-divider-deep'/>
             <div className='system-xs-medium text-text-warning'>
               {error}
+              {/* [수정] 
               <a
                 href='https://docs.dify.ai/guides/workflow/error-handling/error-type'
                 target='_blank'
@@ -140,6 +141,7 @@ const StatusPanel: FC<ResultProps> = ({
               >
                 {t('workflow.common.learnMore')}
               </a>
+              */}
             </div>
           </>
         )

@@ -230,8 +230,10 @@ const SettingsModal: FC<ISettingsModalProps> = ({
           </div>
           <div className='mt-0.5 text-text-tertiary system-xs-regular'>
             <span>{t(`${prefixSettings}.modalTip`)}</span>
+          {/* [수정] 
             <Link href={`${locale === LanguagesSupported[1] ? 'https://docs.dify.ai/zh-hans/guides/application-publishing/launch-your-webapp-quickly#she-zhi-ni-de-ai-zhan-dian' : 'https://docs.dify.ai/guides/application-publishing/launch-your-webapp-quickly#setting-up-your-ai-site'}`} target='_blank' rel='noopener noreferrer' className='text-text-accent'>{t('common.operation.learnMore')}</Link>
-          </div>
+          */}
+            </div>
         </div>
         {/* form body */}
         <div className='px-6 py-3 space-y-5'>

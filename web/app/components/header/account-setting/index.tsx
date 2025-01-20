@@ -85,6 +85,7 @@ export default function AccountSetting({
         icon: <RiMoneyDollarCircleLine className={iconClassName} />,
         activeIcon: <RiMoneyDollarCircleFill className={iconClassName} />,
       },
+      /* [수정]
       {
         key: 'data-source',
         name: t('common.settings.dataSource'),
@@ -97,6 +98,7 @@ export default function AccountSetting({
         icon: <RiPuzzle2Line className={iconClassName} />,
         activeIcon: <RiPuzzle2Fill className={iconClassName} />,
       },
+      */
       {
         key: (enableReplaceWebAppLogo || enableBilling) ? 'custom' : false,
         name: t('custom.custom'),
@@ -203,8 +205,10 @@ export default function AccountSetting({
             {activeMenu === 'billing' && <BillingPage />}
             {activeMenu === 'language' && <LanguagePage />}
             {activeMenu === 'provider' && <ModelProviderPage />}
+            {/* [수정]
             {activeMenu === 'data-source' && <DataSourcePage />}
             {activeMenu === 'api-based-extension' && <ApiBasedExtensionPage />}
+            */}
             {activeMenu === 'custom' && <CustomPage />}
           </div>
         </div>

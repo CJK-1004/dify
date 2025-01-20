@@ -33,6 +33,7 @@ const DefaultValue = ({
       <div className='mb-2 body-xs-regular text-text-tertiary'>
         {t('workflow.nodes.common.errorHandle.defaultValue.desc')}
         &nbsp;
+        {/* [수정]
         <a
           href='https://docs.dify.ai/guides/workflow/error-handling'
           target='_blank'
@@ -40,6 +41,7 @@ const DefaultValue = ({
         >
           {t('workflow.common.learnMore')}
         </a>
+        */}
       </div>
       <div className='space-y-1'>
         {
