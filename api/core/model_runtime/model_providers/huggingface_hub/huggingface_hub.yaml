@@ -1,6 +1,10 @@
 provider: huggingface_hub
 label:
   en_US: Hugging Face Model
+description:
+  en_US: Hugging Face 에서 제공하는 모델을 사용합니다.
+  zh_Hans: GroqCloud 提供对 Groq Cloud API 的访问，其中托管了 LLama2 和 Mixtral 等模型。
+  ko_KR: GroqCloud는 LLama2 및 Mixtral과 같은 모델을 호스팅하는 Groq Cloud API에 대한 액세스를 제공합니다.
 icon_small:
   en_US: icon_s_en.svg
 icon_large:
