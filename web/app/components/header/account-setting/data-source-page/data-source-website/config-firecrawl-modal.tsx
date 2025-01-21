@@ -153,7 +153,7 @@ const ConfigFirecrawlModal: FC<Props> = ({
                 {t('common.modelProvider.encrypted.back')}
               </div>
             </div>
-*/}
+
           </div>
         </div>
       </PortalToFollowElemContent>
