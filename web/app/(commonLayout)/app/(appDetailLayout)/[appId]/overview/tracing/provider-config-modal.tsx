@@ -302,6 +302,7 @@ const ProviderConfigModal: FC<Props> = ({
 
                     </div>
                   </div>
+{/* [수정]
                   <div className='border-t-[0.5px] border-t-black/5'>
                     <div className='flex justify-center items-center py-3 bg-gray-50 text-xs text-gray-500'>
                       <Lock01 className='mr-1 w-3 h-3 text-gray-500' />
@@ -316,6 +317,7 @@ const ProviderConfigModal: FC<Props> = ({
                       {t('common.modelProvider.encrypted.back')}
                     </div>
                   </div>
+*/}                                    
                 </div>
               </div>
             </PortalToFollowElemContent>
