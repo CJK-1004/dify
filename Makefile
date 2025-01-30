@@ -1,7 +1,7 @@
 # Variables
 DOCKER_REGISTRY=magiceco
-WEB_IMAGE=$(DOCKER_REGISTRY)/dify-web
-API_IMAGE=$(DOCKER_REGISTRY)/dify-api
+WEB_IMAGE=$(DOCKER_REGISTRY)/pbt-web
+API_IMAGE=$(DOCKER_REGISTRY)/pbt-api
 VERSION=latest
 
 # Build Docker images
