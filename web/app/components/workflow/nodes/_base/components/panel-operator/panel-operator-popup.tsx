@@ -54,7 +54,9 @@ const PanelOperatorPopup = ({
   const edge = edges.find(edge => edge.target === id)
   const author = useMemo(() => {
     if (data.type !== BlockEnum.Tool)
-      return nodesExtraData[data.type].author
+      return "pbt" 
+// [수정] magic   
+//      return nodesExtraData[data.type].author
 
     if (data.provider_type === CollectionType.builtIn)
       return buildInTools.find(toolWithProvider => toolWithProvider.id === data.provider_id)?.author
@@ -185,7 +187,9 @@ const PanelOperatorPopup = ({
           </div>
           <div className='mb-1 text-gray-700 leading-[18px]'>{about}</div>
           <div className='leading-[18px]'>
+{/* [수정]            
             {t('workflow.panel.createdBy')} {author}
+*/}
           </div>
         </div>
       </div>
